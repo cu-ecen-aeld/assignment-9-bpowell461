@@ -25,10 +25,7 @@ echo "Available modules:"
 echo "$results"
 
 # Load the module and exit on failure
-if ! insmod /lib/modules/$(uname -r)/extra/$module.ko $*; then
-    echo "Failed to load module $module"
-    exit 1
-fi
+insmod /lib/modules/$(uname -r)/extra/$module.ko $* || exit 1
 
 # Get the major number from /proc/devices
 major=$(awk "\$2==\"$module\" {print \$1}" /proc/devices)
