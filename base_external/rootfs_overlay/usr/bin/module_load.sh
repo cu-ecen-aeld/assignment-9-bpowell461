@@ -19,6 +19,11 @@ else
     group="wheel"
 fi
 
+results=$(find /lib/modules/$(uname -r) -type f -name '*.ko')
+
+echo "Available modules:"
+echo "$results"
+
 # Load the module and exit on failure
 if ! insmod /lib/modules/$(uname -r)/extra/$module.ko $*; then
     echo "Failed to load module $module"
