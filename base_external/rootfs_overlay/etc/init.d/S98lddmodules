@@ -1,19 +1,20 @@
 #!/bin/sh
 case "$1" in
-    start)
-        echo "Loading..."
-        scull_load.sh
-        module_load.sh faulty
-        modprobe hello
-        ;;
-    stop)
-        echo "Unloading..."
-        scull_unload.sh
-        module_unload.sh faulty
-        rmmod hello
-        ;;
-    *)
-        echo "usage: $0 {start|stop}"
-        exit 1
+start)
+    echo "Loading modules"
+    scull_load scull
+    module_load faulty
+    modprobe hello
+    aesdchar_load aesdchar
+    ;;
+stop)
+    echo "Unloading modules"
+    scull_unload scull
+    module_unload faulty
+    rmmod hello
+    aesdchar_unload aesdchar
+    ;;
+*)
+    echo "Usage: $0 {start|stop}"
+    exit 1
 esac
-exit 0
